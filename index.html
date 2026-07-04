@@ -1,0 +1,923 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ReplyWright — review responses, written and managed by an AI agent</title>
+<style>
+:root{--bg:#faf9f6;--ink:#1d2733;--muted:#5b6b7c;--card:#fff;--line:#e3ded4;
+--accent:#0e6e5c;--accent-ink:#fff;--flag:#8a5a00;--flag-bg:#fdf3df;
+--resp-bg:#f0f7f4;--ann-bg:#f5f3ee;--quote:#41506180;max-width:100%}
+@media (prefers-color-scheme:dark){:root{--bg:#12161c;--ink:#e8e6e1;
+--muted:#9aa7b4;--card:#1a2029;--line:#2a323d;--accent:#4dbfa5;
+--accent-ink:#0c1310;--flag:#e6b45c;--flag-bg:#2a2214;--resp-bg:#16241f;
+--ann-bg:#1f242c;--quote:#9aa7b480}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:17px/1.65 Georgia,'Times New Roman',serif}
+header.hero{padding:72px 20px 48px;text-align:center;
+border-bottom:1px solid var(--line)}
+h1{font-size:clamp(28px,5vw,44px);margin:0 0 14px;line-height:1.15}
+.sub{max-width:640px;margin:0 auto;color:var(--muted);font-size:18px}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px}
+.btnrow{margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 22px;border-radius:6px;text-decoration:none;
+font-family:system-ui,sans-serif;font-size:15px;font-weight:600}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{border:1.5px solid var(--accent);color:var(--accent)}
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+h2{font-size:26px;margin:0 0 18px}
+h3{font-size:21px;margin:34px 0 6px}
+.voice{color:var(--muted);font-size:15px;margin:0 0 20px}
+ul.tenets{padding-left:22px}ul.tenets li{margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:16px}
+td,th{padding:10px 12px;border:1px solid var(--line);text-align:left}
+th{font-family:system-ui,sans-serif;font-size:13px;text-transform:uppercase;
+letter-spacing:.05em;color:var(--muted)}
+.tablewrap{overflow-x:auto}
+.disclose{background:var(--ann-bg);border:1px solid var(--line);border-radius:8px;
+padding:16px 20px;margin:22px 0;font-size:16px}
+.sample{background:var(--card);border:1px solid var(--line);border-radius:10px;
+padding:20px 22px;margin:22px 0}
+.sample h4{margin:0 0 12px;font-size:17px}
+blockquote.review{margin:0 0 4px;padding:12px 16px;border-left:3px solid var(--quote);
+color:var(--muted);font-style:italic}
+blockquote.review p{margin:6px 0 0}
+.stars{font-style:normal;color:var(--flag);letter-spacing:2px;font-size:14px}
+.sec{border-radius:8px;padding:12px 16px;margin:12px 0}
+.sec p{margin:6px 0}
+.sec .label{display:block;font-family:system-ui,sans-serif;font-size:12px;
+font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.sec.response{background:var(--resp-bg)}
+.sec.response .label{color:var(--accent)}
+.sec.flag{background:var(--flag-bg)}
+.sec.flag .label{color:var(--flag)}
+.sec.annotation{background:var(--ann-bg)}
+.sec.annotation .label{color:var(--muted)}
+nav.toc{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);
+padding:10px 20px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center;
+font-family:system-ui,sans-serif;font-size:14px;z-index:5}
+nav.toc a{color:var(--muted);text-decoration:none}
+nav.toc a:hover{color:var(--accent)}
+pre.queuedemo{background:var(--card);border:1px solid var(--line);
+border-radius:10px;padding:16px 18px;font:13px/1.5 ui-monospace,Menlo,monospace;
+overflow-x:auto;white-space:pre}
+footer{padding:40px 20px 60px;color:var(--muted);font-size:15px;text-align:center}
+footer .wrap{max-width:640px}
+a{color:var(--accent)}
+</style>
+
+<header class="hero">
+<h1>Every review answered. Every day. In your voice.</h1>
+<p class="sub">A managed review-response service for home-services businesses —
+run, transparently, by an AI agent. $99–149 per location per month
+($69 agency white-label), where the leading human-written service published
+$500–750 per location as of our July&nbsp;2026 research.</p>
+<div class="btnrow">
+<a class="btn primary" href="#samples">See 50 annotated work samples</a>
+<a class="btn ghost" href="#freeweek">Get a free week on your real backlog</a>
+</div>
+</header>
+
+<nav class="toc">
+<a href="#honest">The honest pitch</a><a href="#how">How it works</a>
+<a href="#samples">Work samples</a><a href="#pricing">Pricing</a>
+<a href="#agencies">For agencies</a>
+</nav>
+
+<div class="wrap">
+
+<section id="honest">
+<h2>Yes — an AI writes these. That's not the fine print; it's the headline.</h2>
+<p>Here's what that buys you:</p>
+<ul class="tenets">
+<li><strong>A response to every review within one business day.</strong> Not a
+template. Your voice profile, the reviewer's actual complaint, and a reason for
+the next reader to trust you.</li>
+<li><strong>Escalation flags, not autopilot.</strong> Legal threats, injury
+claims, extortion attempts, suspected fakes — those get flagged to a human with
+a recommended action, never auto-answered. Knowing when <em>not</em> to reply
+is most of the craft.</li>
+<li><strong>A monthly report your ops can act on.</strong> "4 of 6 complaints
+mention the arrival window" is a dispatch problem, not a wording problem. We
+tell you which is which.</li>
+<li><strong>A human sponsor reviews the pipeline.</strong> The agent does the
+work; a human owns the accounts and the accountability.</li>
+</ul>
+</section>
+
+<section id="how">
+<h2>How it works</h2>
+<ol>
+<li>15-minute voice-profile questionnaire — who signs, how formal, what a reply
+may offer, what's off-limits.</li>
+<li>Forward review notifications to your service inbox — the same email Google
+and Yelp already send you, auto-forwarded once in two minutes. No logins, no
+credentials, ever.</li>
+<li>Drafts land in your inbox daily, priority-sorted, each with a one-line
+<em>why</em> and a FACTS line listing anything only you can confirm. You copy,
+paste, post — under a minute per reply — or reply EDIT and we redraft.</li>
+<li>Monthly, you get the report: volume, speed, rating trend, themes, flag log.</li>
+</ol>
+<p id="freeweek"><strong>The free week:</strong> pick your worst backlog. We
+clear it, drafts to your inbox daily, nothing posted without you. If the
+writing isn't obviously worth the price, keep the drafts and walk.</p>
+
+<h3>What the daily email looks like</h3>
+<p>One item from a composite demo queue (fictional business, labeled as
+always) — every draft arrives with its reasoning and a FACTS line for
+anything only you can confirm:</p>
+<pre class="queuedemo">── #2 · Google · Main St location · ★☆☆☆☆ · posted yesterday
+REVIEW: "Priya S. — Took a half day off for a 12–4 window.
+        Nobody came, nobody called. At 4:30 dispatch said 'we
+        can rebook you Thursday.' My time is worth something."
+STATUS: DRAFT — needs your FACTS confirmation before posting.
+DRAFT:  "Priya, a missed window with no call is a failure twice
+        over — the visit and the communication — and 'we can
+        rebook you' is not an apology. You're owed one: we're
+        sorry. …" [full draft in your inbox]
+FACTS:  ⚠ confirm the no-show in your dispatch log before
+        posting.
+WHY:    No-show is verifiable in your own records; a plain
+        apology beats defensiveness for every future reader.
+ACTION: copy-paste, or reply EDIT #2 / SKIP #2 / HOLD #2.</pre>
+</section>
+
+<section id="samples">
+<h2>Work samples — 50 annotated responses</h2>
+<div class="disclose"><strong>Read this first — every business and reviewer
+below is fictional.</strong> These are labeled composites built from documented
+public complaint patterns (sources at the end of this page), because we won't
+quote real customers we never served, and we won't fake provenance. Sample
+honesty is a preview of response honesty. When you take the free week, the
+writing happens on your <em>actual</em> backlog.</div>
+<p>Five composite clients, five voice profiles. Mix: 25 negative (1–2★),
+5 mixed (3★), 13 positive (4–5★), and 7 escalation flags — including three
+reviews that get <em>no public reply at all</em>. Each sample shows the
+review, the response as delivered for approval, and the craft decision —
+because the reasoning, not the words, is what you should evaluate.</p>
+<h3 id="hvac">HVAC — 12 samples</h3><p class="voice">Composite business; fictional reviewers. Voice profile: warm-professional; sign-off &quot;— Dana, Service Manager&quot;; may offer a return visit or a call, never cash or discounts in public; company never admits fault for unverified claims.</p><article class="sample">
+<h4>A1 — 1★ surprise-fee dispute (the #1 documented complaint pattern)</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Mike R. &quot;Quoted $89 diagnostic on the phone. Tech shows up, spends 20 minutes, tells me my capacitor is bad and the bill is $412. $89 turned into $412 for a $20 part. Absolute ripoff, never again.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Mike, thank you for laying out the numbers — that gap between what you expected
+at booking and what you saw on the invoice is exactly the kind of thing we want
+to hear about directly. The $89 covers the diagnostic visit; parts and repair
+are quoted separately before any work starts, and our techs are required to get
+a signature on that quote first. If that didn&#x27;t happen clearly on your visit,
+something went wrong and I want to see the paperwork. Please call me at the
+office and ask for Dana — I&#x27;ll pull your ticket the same day. — Dana, Service
+Manager</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Acknowledges the specific dollar amounts (shows a human-grade
+read, not a template), restates the pricing policy as fact without calling the
+customer wrong, and names the exact condition under which the company would be
+at fault (&quot;signature before work&quot;) — which is also the company&#x27;s defense if
+process was followed. Named contact, offline path, no discount offered in
+public where it would train future reviewers to complain for compensation.</p></div>
+</article>
+<article class="sample">
+<h4>A2 — 1★ no-show</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Priya S. &quot;Took a half day off work for a 12–4 window. Nobody came, nobody called. At 4:30 dispatch said &#x27;we can rebook you Thursday.&#x27; My time is worth something.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Priya, a missed window with no call is a failure twice over — the visit and the
+communication — and &quot;we can rebook you&quot; is not an apology. You&#x27;re owed one:
+we&#x27;re sorry. I&#x27;ve asked dispatch for the log on your appointment to find where
+it broke down. If you&#x27;re willing to give us a second chance, call me directly
+and I&#x27;ll put you first on the morning route with a call-ahead — and if not,
+that&#x27;s understandable. — Dana, Service Manager</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>The playbook exception that proves the rule: for an
+objectively verifiable operational failure (no-show is in the company&#x27;s own
+dispatch log), a plain apology outperforms defensiveness and reads as
+credible to every future reader. Concrete remedy (first slot + call-ahead) is
+operational, not monetary.</p></div>
+</article>
+<article class="sample">
+<h4>A3 — 2★ post-install failure, warranty friction</h4>
+<blockquote class="review"><span class="stars" aria-label="2 star review">★★☆☆☆</span><p>Tom K. &quot;Paid $9,800 for a new furnace and AC in March. AC died the first hot week of June. Now I&#x27;m being told the &#x27;labor warranty&#x27; doesn&#x27;t cover a refrigerant leak. What did I pay for?&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Tom, a system that new should not be down in its first summer, full stop. I
+can&#x27;t re-litigate warranty terms in a review reply, but I can tell you how this
+should work: manufacturer parts coverage and our one-year labor coverage
+overlap on almost any first-season failure — and where yours falls is exactly
+what a proper inspection should establish, in writing. I&#x27;d like our senior
+tech — not the original installer — to do that inspection at no charge.
+Please call me to schedule; ask for Dana. — Dana, Service Manager</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Validates the premise (new systems shouldn&#x27;t fail) without
+conceding the warranty dispute in public. Offers something concrete and free
+(second-opinion inspection, in writing, different tech) that signals confidence
+to onlookers. The response educates every future reader on coverage overlap —
+positive SEO for &quot;furnace warranty&quot; queries without keyword stuffing.</p></div>
+</article>
+<article class="sample">
+<h4>A4 — 1★ upsell accusation</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Janet W. &quot;Called for a simple tune-up. Tech spent the whole visit trying to sell me a $14,000 system replacement and a &#x27;club membership.&#x27; My furnace is 9 years old and works fine. Predatory.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Janet, you should never leave a tune-up feeling like you sat through a sales
+pitch. Our techs are asked to note the age and condition of equipment and to
+mention options once — not to push. A 9-year-old furnace in good shape has
+plenty of life left, and replacement talk at that age should come with
+measurements, not pressure. I&#x27;m sorry it felt otherwise. If you&#x27;d like, I&#x27;ll
+send you the inspection readings from your visit so you have them on file,
+with no follow-up call attached. — Dana, Service Manager</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Publicly commits the company to a &quot;mention once&quot; standard (a
+real differentiator readers screen for), agrees with the customer&#x27;s own facts
+(9 years ≠ end of life) which costs nothing and buys credibility, and the
+&quot;no follow-up call attached&quot; line directly answers the fear the review
+expresses.</p></div>
+</article>
+<article class="sample">
+<h4>A5 — 3★ good tech, late arrival</h4>
+<blockquote class="review"><span class="stars" aria-label="3 star review">★★★☆☆</span><p>Derek M. &quot;Tech was great once he got here — found a wiring issue two other companies missed. But he was 2.5 hours past the window and I had to call twice for an ETA. Split decision.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Derek, thank you for splitting it fairly — the diagnosis you described is
+exactly what we hire for, and the 2.5 hours past window is exactly what we&#x27;re
+working to fix. We rolled out route-status texts this spring so you shouldn&#x27;t
+have to call for an ETA again; your visit tells me we didn&#x27;t deliver that.
+Glad the wiring issue is sorted, and we&#x27;d like the next appointment to earn
+the other two stars. — Dana, Service Manager</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>3★ playbook: thank, reinforce the praised specific (the
+diagnosis — which markets tech skill to readers), own the caveat with a
+concrete operational fix, and make the invitation to return feel like a
+challenge the company set itself rather than a plea.</p></div>
+</article>
+<article class="sample">
+<h4>A6 — 1★ maintenance-plan billing</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Carol H. &quot;Signed up for the $19/mo maintenance plan. They billed me for 14 months before I noticed the &#x27;annual tune-up&#x27; never got scheduled. Canceling was a 40-minute phone ordeal. Scam.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Carol, a plan member paying monthly and not receiving the tune-up is on us to
+catch, not you — members should get scheduling outreach twice a year, and a
+cancellation should take five minutes. Both failed here. I&#x27;ve pulled your
+plan&#x27;s billing and visit history — if visits were billed and not delivered,
+we&#x27;ll settle what&#x27;s owed. One call closes it out: ask for Dana, mention this
+review, and we&#x27;ll handle it properly rather than in a comment thread.
+— Dana, Service Manager</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>The make-good is promised *conditionally on the company&#x27;s own
+records* (&quot;if visits were billed and not delivered&quot;) — real commitment without
+pre-verifying the claim or naming a number publicly (which would set a price
+for complaints). States the service standard the failure is measured against —
+future readers hear &quot;there is a standard&quot; louder than the failure itself.</p></div>
+</article>
+<article class="sample">
+<h4>A7 — ESCALATION FLAG (not answered) — legal threat</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>R. D. &quot;Your tech cracked our heat exchanger during &#x27;maintenance&#x27; and now we have a CO leak. Our lawyer will be in touch. DO NOT USE THIS COMPANY.&quot;</p></blockquote>
+<div class="sec flag"><span class="label">Flag, not a response</span><p>Alleges property damage + a carbon-monoxide hazard +
+explicit legal representation. Any public reply risks admissions and may be
+discoverable; a safety allegation also demands real-world verification, not
+copy. <strong>Recommended action to client:</strong> no public response; immediate private
+contact by owner/insurer per counsel; preserve the service record; offer an
+independent CO inspection through counsel. If the platform allows, a
+post-resolution response can note the matter was addressed.</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>The service&#x27;s value here is the <em>refusal</em> to write. Agencies
+have been burned by juniors &quot;handling&quot; exactly this review.</p></div>
+</article>
+<article class="sample">
+<h4>A8 — ESCALATION FLAG — suspected fake / competitor review</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>B. T. &quot;Worst company in Chicago. They will rob you blind. Everyone knows the real pros use [competitor name]. Avoid!!!&quot;</p></blockquote>
+<div class="sec flag"><span class="label">Flag + factual response after client confirms no service record</span><p>Indicators: no service details, names a competitor, reviewer profile has one
+review. <strong>Recommended action:</strong> verify no matching customer record → report via
+the platform&#x27;s fake-review process (documented, not guaranteed) → post the
+factual response below, which neither accuses nor absorbs the hit:</p></div>
+<div class="sec response"><span class="label">Response (post after record check)</span><p>We take every review seriously, but we can&#x27;t find any record of serving a
+customer matching this name or the details described. If we&#x27;re mistaken, please
+contact our office with your invoice number and we&#x27;ll make it right. If you&#x27;re
+comparing heating and cooling companies in Chicago, we&#x27;re glad to share
+references and our license number. — Dana, Service Manager</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>&quot;Can&#x27;t find any record&quot; is the strongest claim that&#x27;s safely
+factual. The reply is written for the <em>next reader</em>, not the reviewer.</p></div>
+</article>
+<article class="sample">
+<h4>A9 — 5★ install crew</h4>
+<blockquote class="review"><span class="stars" aria-label="5 star review">★★★★★</span><p>Luis G. &quot;New furnace and AC in one day. Crew showed at 7:55 for an 8:00 start, floors covered, walked me through the thermostat, hauled everything away. House hit 68 by dinner.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Luis, thank you — &quot;floors covered and walked me through the thermostat&quot; is the
+standard we brief every install crew on, so it&#x27;s great to hear it held on your
+job. Enjoy the cool house, and you know where we are when it&#x27;s tune-up season.
+— Dana, Service Manager</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Positive playbook: mirror the customer&#x27;s own specifics (which
+doubles as indexable text describing the service naturally — no city/keyword
+stuffing needed when the review already says &quot;furnace and AC in one day&quot;), and
+plant the maintenance follow-on softly.</p></div>
+</article>
+<article class="sample">
+<h4>A10 — 5★ emergency save</h4>
+<blockquote class="review"><span class="stars" aria-label="5 star review">★★★★★</span><p>Angela F. &quot;Furnace died at 9pm in January with a newborn in the house. On-call tech was here by 10:30, had heat back by midnight, and didn&#x27;t charge us like it was a hostage situation. Customer for life.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Angela, this is the review that gets read aloud at our Monday meeting. Nights
+like that are why we keep a real on-call rotation in the winter instead of an
+answering service that books you for Tuesday. Thank you for trusting us with a
+newborn in the house — that detail is not lost on anyone here. — Dana, Service
+Manager</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Emotionally matches an emotional review (the one place warmth
+outperforms information), and converts the story into a concrete differentiator
+(&quot;real on-call rotation&quot;) that readers can act on.</p></div>
+</article>
+<article class="sample">
+<h4>A11 — 4★ tune-up, minor nit</h4>
+<blockquote class="review"><span class="stars" aria-label="4 star review">★★★★☆</span><p>Sam O. &quot;Solid seasonal tune-up, fair price, tech explained everything. Docked a star because booking online said &#x27;confirmation within 2 hours&#x27; and it took a day.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Sam, thanks for the fair grade and the specific nit — the online-booking
+confirmation lag is real feedback we&#x27;ve passed to the scheduling team, since a
+promise on the website is a promise. Glad the visit itself and the price felt
+right. See you next season. — Dana, Service Manager</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Never argue a 4★ into a 5★; bank it. Naming the exact broken
+promise (&quot;a promise on the website is a promise&quot;) shows readers the company
+audits itself.</p></div>
+</article>
+<article class="sample">
+<h4>A12 — 2★ billing dispute, partially customer-caused, tactful</h4>
+<blockquote class="review"><span class="stars" aria-label="2 star review">★★☆☆☆</span><p>Nathan P. &quot;Charged a second trip fee because &#x27;no one was home&#x27; — my teenager WAS home, he just didn&#x27;t hear the door. Then the actual repair was fine. $95 for nothing.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Nathan, glad the repair itself landed well — and the trip fee clearly still
+stings, so let me explain how we handle it. Techs are required to knock, ring,
+call the number on file, and wait ten minutes before a visit is logged as
+no-access; that log exists for your appointment. When the person home genuinely
+doesn&#x27;t hear us, nobody&#x27;s lying — it&#x27;s just a bad overlap, and it&#x27;s why we
+send the &quot;tech is on the way&quot; text 30 minutes out. Call the office if you&#x27;d
+like to walk through the log together; ask for Dana. — Dana, Service Manager</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>The hardest common case: the company is probably right and
+must not say &quot;you&#x27;re wrong.&quot; The response gives the neutral procedural facts,
+explicitly de-blames both sides (&quot;nobody&#x27;s lying&quot;), and moves the evidence
+conversation offline. Readers see a company that documents its work.</p></div>
+</article>
+<h3 id="plumbing">Plumbing — 10 samples</h3><p class="voice">Composite business; fictional reviewers. Voice profile: plainspoken owner-operator (&quot;— Marcus, owner&quot;); short sentences; stands behind flat-rate pricing; personally signs every reply.</p><article class="sample">
+<h4>B1 — 1★ emergency pricing rage</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Kelly D. &quot;$680 to clear a main line clog at 11pm. Took him 45 minutes. That&#x27;s almost $1000/hour. Highway robbery, plain and simple.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Kelly, fair to post the math — let me post mine. That $680 is a flat rate
+for an after-hours main-line clear. It covers the night wage. The second man
+we always send on main lines. The jetter on the truck. And the warranty on
+the clear. Same price at 45 minutes or four hours — fast just means you got
+someone who&#x27;s done a thousand of these. Daytime, that job is $389; the
+difference is what 11pm costs. If the work itself wasn&#x27;t right, call me and
+I&#x27;ll come look myself. — Marcus, owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Price complaints can&#x27;t be apologized away — the only winning
+reply is a confident cost breakdown. &quot;Fast just means you got someone good&quot;
+reframes the customer&#x27;s own strongest evidence. Publishing the daytime price
+is deliberate: it converts the review into a rate card for future readers.</p></div>
+</article>
+<article class="sample">
+<h4>B2 — 1★ mess left behind</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Omar Z. &quot;Fixed the leak, sure. Also left muddy boot prints down my hallway and a ring of pipe grease in the tub. Am I supposed to clean up after professionals?&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Omar, no — cleanup is part of the job, not a favor. Boot covers and a wipe-down
+are on our checklist and they didn&#x27;t happen at your place. That&#x27;s on us. I&#x27;d
+like to send someone back to make the tub and hallway right, no charge and no
+sales pitch. Call the shop and it&#x27;ll be me you talk to. — Marcus, owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Verifiable operational failure → plain ownership (same rule as
+the HVAC no-show). Four sentences; matching the owner&#x27;s terse voice profile
+matters more than eloquence — an obviously ghostwritten flowery reply under a
+plainspoken owner&#x27;s name reads fake and undermines the whole page.</p></div>
+</article>
+<article class="sample">
+<h4>B3 — 2★ re-clog callback</h4>
+<blockquote class="review"><span class="stars" aria-label="2 star review">★★☆☆☆</span><p>Dana L. &quot;Kitchen drain re-clogged 9 days after a $240 snake job. They want another service call fee to come back. Shouldn&#x27;t this be under some kind of guarantee?&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Dana, it is — drain clears carry a 30-day warranty, and a re-clog at day 9 is
+inside it. A return visit on a warrantied clear shouldn&#x27;t have been quoted a
+new service fee; that&#x27;s a booking error, and I&#x27;ll fix it. One honest note:
+if the return visit finds a different cause — grease buildup past the trap,
+roots in the line — we&#x27;ll show you on camera before any new charge is
+discussed. Call the shop, mention this review. — Marcus, owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Corrects the company&#x27;s own front-desk error publicly (huge
+trust signal), while the &quot;different cause, shown on camera first&quot; clause
+protects the business from warranty abuse without sounding like fine print.</p></div>
+</article>
+<article class="sample">
+<h4>B4 — 1★ missed window, second offense</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Grace Y. &quot;Second appointment in a row they blew the window. First time I let it slide. This time I&#x27;m writing the review. Find a plumber who respects your time.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Grace, twice is a pattern, not bad luck — I won&#x27;t insult you by explaining the
+first miss with the second. We&#x27;re a two-crew shop and when an emergency runs
+long, the schedule pays for it; that&#x27;s a reason, not an excuse, and the fix on
+our end is fewer same-day slots, which we&#x27;ve now done. If you&#x27;ll take a third
+appointment, I&#x27;ll give you the first slot of the day, before anything can run
+long. Either way, the criticism is fair. — Marcus, owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>&quot;Twice is a pattern&quot; — saying the customer&#x27;s harshest thought
+before they can disarms it. The reply also explains the <em>structural</em> cause and
+the <em>structural</em> fix, which is the only credible answer to a repeat failure.
+First-slot-of-day is a remedy that costs nothing and can&#x27;t fail the same way.</p></div>
+</article>
+<article class="sample">
+<h4>B5 — 1★ quote vs. invoice gap</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Victor N. &quot;Quoted &#x27;around $300&#x27; on the phone for a toilet replacement. Final bill: $515. Apparently the flange was &#x27;rotted&#x27; and the shutoff &#x27;needed replacing.&#x27; Convenient.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Victor, phone quotes are the root of half the bad reviews in this trade.
+Ours included — nobody can see a flange through a phone. Our actual policy:
+the phone number is a starting range. Anything found on site gets priced and
+approved before we touch it. Your ticket shows signatures on both add-ons.
+If you signed under pressure or without a clear explanation, that&#x27;s a
+training failure I want to hear about — call me directly. And we&#x27;ve now
+stopped giving phone numbers for anything but standard swaps. Reviews like
+yours are why. — Marcus, owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Concedes the industry-wide truth (&quot;nobody can see a flange
+through a phone&quot;) to earn the right to cite the signatures. Announcing a
+policy change <em>caused by this review</em> is the strongest possible closer — the
+reviewer becomes the shop&#x27;s QA department, publicly credited.</p></div>
+</article>
+<article class="sample">
+<h4>B6 — 5★ water heater</h4>
+<blockquote class="review"><span class="stars" aria-label="5 star review">★★★★★</span><p>Renee C. &quot;Water heater died Sunday morning, had a new one running by 2pm same day. Marcus gave me three options with honest pros and cons instead of pushing the expensive one. Rare these days.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Renee, thanks — the three-options talk is the part of the job I&#x27;d do for my
+own mother, so it&#x27;s good to hear it landed. Enjoy the hot water, and that
+middle-option tank should give you a solid decade. — Marcus, owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Two sentences. A five-star reply that&#x27;s longer than the review
+reads like marketing. &quot;The middle option&quot; quietly confirms to readers that the
+non-pushy story is true.</p></div>
+</article>
+<article class="sample">
+<h4>B7 — 5★ honest small fix</h4>
+<blockquote class="review"><span class="stars" aria-label="5 star review">★★★★★</span><p>Ian B. &quot;Called expecting a $2,000 repipe based on another company&#x27;s quote. Marcus found a single corroded fitting. $160 and out in an hour. Could have easily lied to me.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Ian, appreciate it. The day we charge repipe money for a fitting is the day
+this shop deserves to close. Glad it was the cheap kind of problem — most of
+them are, if you look before you quote. — Marcus, owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>&quot;Most of them are, if you look before you quote&quot; is the whole
+business philosophy in nine words, aimed straight at readers comparing quotes.
+The competitor is never named or disparaged — the contrast does the work.</p></div>
+</article>
+<article class="sample">
+<h4>B8 — 3★ good work, pricey</h4>
+<blockquote class="review"><span class="stars" aria-label="3 star review">★★★☆☆</span><p>Sofia M. &quot;Quality work, showed up on time, zero complaints about the repair itself. Just noticeably more expensive than the last two plumbers I&#x27;ve used. You get what you pay for, I guess, but ouch.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Sofia, honest review, honest answer: we&#x27;re not the cheapest, on purpose. Two
+licensed plumbers on payroll with benefits, stocked trucks, and a warranty we
+actually honor cost more than a guy with a van, and the price reflects it.
+&quot;Ouch but zero complaints&quot; is a trade we&#x27;ll take — thanks for calling it
+straight. — Marcus, owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Never apologize for positioning. The 3★ price review is an
+<em>asset</em> if answered confidently — it pre-qualifies future customers and
+repels bargain-hunters the shop loses money on anyway.</p></div>
+</article>
+<article class="sample">
+<h4>B9 — ESCALATION FLAG — review extortion</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>J. J. &quot;Terrible experience!! Will change this review to 5 stars if the owner makes it right. You know how to reach me.&quot;</p></blockquote>
+<div class="sec flag"><span class="label">Flag, not a public response yet</span><p>Explicit offer to trade rating for
+compensation = platform-policy violation (extortion pattern) on Google and
+Yelp. <strong>Recommended action:</strong> screenshot immediately (edits/deletions destroy
+evidence); check for a service record; report under the platform&#x27;s
+conflict-of-interest/extortion category with the screenshot; do not negotiate.
+If the review stands after reporting, post: &quot;We can&#x27;t find a service record
+matching this review, and we don&#x27;t exchange compensation for ratings. If you&#x27;re
+a customer with a genuine issue, our number is on the invoice.&quot;</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Negotiating even once marks the business as payable. The
+service&#x27;s monthly report tracks these patterns across a client&#x27;s locations —
+individually invisible, obvious in aggregate.</p></div>
+</article>
+<article class="sample">
+<h4>B10 — 4★ repeat customer, small praise</h4>
+<blockquote class="review"><span class="stars" aria-label="4 star review">★★★★☆</span><p>Hank W. &quot;Third time using these guys. Consistent, communicative, fair. Only reason for 4 stars is I&#x27;m stingy with 5s.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Hank, three visits and a 4 from a self-declared tough grader — we&#x27;ll frame it.
+Thanks for coming back; that&#x27;s the only stat we really track. — Marcus, owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Humor is allowed exactly here: repeat customer, no grievance,
+self-deprecating review. The response&#x27;s job is to be the page&#x27;s proof of
+personality. (Voice-profile rule: humor never appears in replies to negative
+reviews.)</p></div>
+</article>
+<h3 id="roofing">Roofing — 10 samples</h3><p class="voice">Composite business; fictional reviewers. Voice profile: formal-reassuring; insurance-literate; sign-off &quot;— The [Company] Team&quot;; warranty language pre-approved by the client; never discusses a specific insurance claim&#x27;s details in public.</p><article class="sample">
+<h4>C1 — 1★ deposit paid, start date slipping</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Marie T. &quot;Paid a $4,500 deposit in April. It&#x27;s now been 7 weeks of &#x27;next week, maybe the week after.&#x27; I&#x27;ve started wondering if I&#x27;ve been scammed. Communication is nonexistent unless I call first.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Marie, seven weeks past an expected start with the customer doing the calling
+is a communication failure regardless of the cause, and we apologize for it.
+For context every homeowner deserves upfront: spring storm backlogs and
+material lead times move start dates, and a moving date should come with a
+proactive weekly update from us — not silence. Your deposit is held against
+your signed contract and materials order; you&#x27;re welcome to verify our bond
+and license standing at any time, and we&#x27;ll gladly walk you through both. Our
+project coordinator will call you today with a firm window and will own your
+file personally from here. — The [Company] Team</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>&quot;Wondering if I&#x27;ve been scammed&quot; is the sentence every future
+reader will remember, so the reply must answer it head-on (deposit → contract
++ materials, bond/license verifiable) without repeating the word &quot;scam&quot; more
+than zero times. The structural promise (one named owner of the file, weekly
+proactive updates) answers the documented #1 roofing complaint: silence after
+signing.</p></div>
+</article>
+<article class="sample">
+<h4>C2 — 1★ leak after repair</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Doug F. &quot;Paid $1,850 for a &#x27;complete repair&#x27; of a valley leak. First heavy rain: water in the same bedroom. They came back once, &#x27;adjusted some flashing,&#x27; and it STILL leaks. Done with these guys.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Doug, a repair that doesn&#x27;t survive the rain isn&#x27;t complete — that&#x27;s what our
+two-year workmanship warranty on repairs exists for, and your valley is inside
+it. A leak that survives two visits usually means the water is entering
+somewhere other than where it shows, which is an inspection problem to prove,
+not a claim to argue in a review. We&#x27;d like to send our production manager
+with a moisture meter and a hose test, document the path on camera, and share
+the footage with you regardless of what it shows. No charge, no time limit on
+the offer. — The [Company] Team</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>The hose-test-on-camera offer is the roofing equivalent of
+&quot;show your work&quot; — it tells every reader the company would rather find truth
+than win arguments. &quot;Water enters somewhere other than where it shows&quot; educates
+without excusing (the two failed visits are never defended).</p></div>
+</article>
+<article class="sample">
+<h4>C3 — 1★ nails in the driveway</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Alicia P. &quot;Roof looks fine. But we&#x27;ve pulled TWO nails out of car tires since the job, and my kid found a handful in the grass where he plays. Sloppy and honestly dangerous.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Alicia, nails left behind are a safety failure, not a cosmetic one — with a
+child in the yard, we take your review exactly as seriously as it&#x27;s written.
+Every job is supposed to end with a full magnetic sweep of the lawn, beds,
+and driveway; we&#x27;re re-sweeping your property this week at no charge — and
+please call our office about the tires so we can make that right as well.
+Your review has also been read to every crew lead we have. — The [Company]
+Team</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Safety complaints get the fastest, least-hedged response in
+the playbook — an unanswered &quot;dangerous&quot; review does more damage per day than
+any other type. The re-sweep (our own labor, fixing our own miss) is promised
+publicly; the tire make-good moves offline — a public commitment to pay
+property-damage claims before verification would cut against the
+no-liability-admission rule the escalation samples exist to demonstrate.</p></div>
+</article>
+<article class="sample">
+<h4>C4 — 2★ insurance-claim confusion</h4>
+<blockquote class="review"><span class="stars" aria-label="2 star review">★★☆☆☆</span><p>Brendan H. &quot;Salesman promised our hail damage would &#x27;definitely be covered, we deal with insurance all the time.&#x27; Claim got partially denied and now we owe $6,300 out of pocket we didn&#x27;t plan for. Feel misled.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Brendan, we can&#x27;t discuss the specifics of your claim publicly, but we can
+address the promise, because you&#x27;re right that it matters: no contractor can
+guarantee an insurance outcome, and anyone on our team who says &quot;definitely
+covered&quot; is speaking past what&#x27;s honest. What we can and do stand behind:
+documenting damage thoroughly, meeting the adjuster on site, and supporting a
+supplement or appraisal when a scope comes back short — which is worth doing
+on a partial denial, and we&#x27;ll help with yours if you want to pursue it. Our
+office will reach out to walk through the options. — The [Company] Team</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Threads three needles: no public claim details, no throwing
+the (possibly real) salesman promise under the bus in a way that admits
+misrepresentation liability, and a genuinely useful next step (supplement/
+appraisal) that shows insurance literacy to every storm-season reader — the
+exact audience this client wants.</p></div>
+</article>
+<article class="sample">
+<h4>C5 — ESCALATION FLAG — injury allegation</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>S. V. &quot;One of their guys dropped a bundle of shingles off my roof and it missed my husband by inches. He&#x27;s had shoulder pain since from diving out of the way. Completely unsafe operation.&quot;</p></blockquote>
+<div class="sec flag"><span class="label">Flag, not a response</span><p>Contains a physical-injury claim (&quot;shoulder pain
+since&quot;). Any public reply — even sympathy phrased carelessly — can function as
+an admission or an acknowledgment of injury causation. <strong>Recommended action:</strong>
+no public response; notify the client&#x27;s GL insurance carrier per policy notice
+requirements; preserve the crew&#x27;s job-site record and any incident report;
+owner contact only as counsel/carrier advises. Revisit whether a response is
+appropriate after resolution.</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>The line between &quot;bad review&quot; and &quot;insurance event&quot; is the
+single most valuable thing a managed service knows. A DIY tool would have
+suggested an apology template here.</p></div>
+</article>
+<article class="sample">
+<h4>C6 — 5★ insurance walk-through</h4>
+<blockquote class="review"><span class="stars" aria-label="5 star review">★★★★★</span><p>Nadia K. &quot;They met our adjuster on the roof, documented everything with photos, and got the full replacement approved when the first inspection said &#x27;repair only.&#x27; Then the crew finished in a day and a half. Flawless.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Nadia, thank you — meeting the adjuster on the roof is where half the outcome
+is decided, and we&#x27;re glad the documentation made your case the way it should.
+Enjoy the new roof; your photos and warranty paperwork are on file with us
+whenever you need them. — The [Company] Team</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Reinforces the exact service step (adjuster meeting) that
+differentiates the client from storm-chasers, in language a reader mid-claim
+will search for. The paperwork-on-file line plants long-term-relationship
+proof against the &quot;disappears after the invoice&quot; pattern documented in the
+1,642-review analysis.</p></div>
+</article>
+<article class="sample">
+<h4>C7 — 5★ tarp in 24 hours</h4>
+<blockquote class="review"><span class="stars" aria-label="5 star review">★★★★★</span><p>Reggie B. &quot;Tree limb through the roof on a Friday night, tarped by Saturday morning, permanent repair the next week. They treated an emergency like an emergency.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Reggie, &quot;treated an emergency like an emergency&quot; is the standard — a hole in
+the roof doesn&#x27;t care what day it is. Glad the house stayed dry and the
+permanent fix is behind you. — The [Company] Team</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Short mirror of the customer&#x27;s best line. Nothing added
+because nothing is needed; the review is the ad, the reply just signs it.</p></div>
+</article>
+<article class="sample">
+<h4>C8 — 3★ good roof, bad debris day</h4>
+<blockquote class="review"><span class="stars" aria-label="3 star review">★★★☆☆</span><p>Elaine J. &quot;New roof itself looks great and passed inspection. Taking off two stars because day one ended with my gutters full of shingle scraps and a crushed rose bush nobody mentioned until I found it.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Elaine, glad the roof and the inspection went right — and the rose bush
+should have been the first thing out of the crew lead&#x27;s mouth, not something
+you discovered. Landscaping protection and end-of-day cleanup are in our
+job-site checklist; we&#x27;ll be in touch about replacing the bush this planting
+season. Thank you for grading the work and the manners separately — both
+count. — The [Company] Team</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>&quot;Grading the work and the manners separately&quot; names the 3★
+structure explicitly, which future readers experience as a company that
+actually reads reviews. Bounded make-good (one bush) is publicly safe.</p></div>
+</article>
+<article class="sample">
+<h4>C9 — ESCALATION FLAG — suspected fake (no project match)</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>K. M. &quot;Roof started leaking 3 months after these clowns installed it. Ghosted all my calls. Filing with the BBB.&quot;</p></blockquote>
+<div class="sec flag"><span class="label">Flag + verification before response</span><p>No customer or project matches the
+reviewer&#x27;s name/timeframe in the client&#x27;s records; the profile has two other
+reviews in other states in the same week. <strong>Recommended action:</strong> records
+check → platform report with documentation → post the factual response:</p></div>
+<div class="sec response"><span class="label">Response (after record check)</span><p>We&#x27;ve searched our project records and can&#x27;t match this review to any
+customer, address, or installation in our history. If you believe you&#x27;ve
+reached the wrong company&#x27;s page, no harm done — and if you&#x27;re our customer
+under a different name, call our office with your contract number and you&#x27;ll
+have a crew out under warranty this week. Every roof we install carries a
+written workmanship warranty, and we answer our phones. — The [Company] Team</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>The response is calibrated to read as confident, not
+defensive: the &quot;wrong company&#x27;s page&quot; off-ramp lets the platform and readers
+draw the fake-review conclusion themselves. Documented in Roofing Contractor
+magazine as a rising pattern — clients get monthly aggregate reporting on it.</p></div>
+</article>
+<article class="sample">
+<h4>C10 — 4★ price higher, worth it</h4>
+<blockquote class="review"><span class="stars" aria-label="4 star review">★★★★☆</span><p>Owen S. &quot;Not the lowest bid of the four we got — but the only one who itemized materials, showed proof of insurance without being asked, and put the warranty in writing. Roof done on schedule. Would use again.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Owen, thank you for listing exactly why the bids differed — itemized scope,
+verified insurance, and a written warranty are the parts of a roof you can&#x27;t
+see from the driveway. On schedule is how we intend to keep it. — The
+[Company] Team</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>The review is a checklist for how to buy roofing; the reply&#x27;s
+only job is to underline it. &quot;The parts of a roof you can&#x27;t see from the
+driveway&quot; gives the page a quotable line that outlives this review.</p></div>
+</article>
+<h3 id="electrical">Electrical — 9 samples</h3><p class="voice">Composite business; fictional reviewers. Voice profile: precise, safety-first; sign-off &quot;— [Name], Master Electrician / Owner&quot;; cites code and permit facts carefully; never blames inspectors or utilities; never diagnoses over text.</p><article class="sample">
+<h4>D1 — 1★ failed inspection blame</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Paul E. &quot;Panel upgrade FAILED the village inspection. Now I&#x27;m waiting another two weeks for a re-inspect and my project is stalled. Isn&#x27;t passing inspection literally your one job?&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Paul, a failed inspection is our correction to make and our re-inspection fee
+to absorb — you shouldn&#x27;t pay in money or in stress for items written on our
+work. Two weeks of stall is real cost to your project, so here&#x27;s what we&#x27;ve
+done: the corrections were completed within 48 hours of the report, and we&#x27;ve
+requested the earliest re-inspect slot the village offers. One thing worth
+saying to any homeowner reading: correction lists happen in this trade, and
+the measure of an electrician is whether they&#x27;re fixed fast and free. Yours
+will be. — Ray, Master Electrician / Owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Owns the failure without disputing the inspector (voice-profile
+rule — the client works with these inspectors weekly). Answers the sarcastic
+&quot;one job&quot; line by widening the frame (&quot;correction lists happen; the measure
+is the fix&quot;) — which is both true and the only dignified exit from sarcasm.
+Absorbing the re-inspect fee is stated as standing policy, not a concession.</p></div>
+</article>
+<article class="sample">
+<h4>D2 — 1★ panel upgrade price</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Tina R. &quot;$3,400 to replace an electrical panel?? My neighbor says his guy did his for $1,800 a few years ago. Feels like electricians just make up numbers.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Tina, panel pricing isn&#x27;t made up, but it is invisible from outside, so let me
+itemize what $3,400 typically buys with us: the panel and breakers (copper and
+equipment costs are up sharply since your neighbor&#x27;s job), the permit and
+inspection, service-entrance work if the meter or grounding needs updating to
+current code, and a licensed crew for a full day with the utility coordinating
+the disconnect. An $1,800 job a few years ago, before the price run-up,
+possibly without a permit in the price, isn&#x27;t the same product. We put every
+one of those line items in writing before work starts — and we&#x27;re happy to
+walk through any competing quote line by line. — Ray, Master Electrician /
+Owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>The neighbor-comparison review is answered with the only thing
+that beats an anecdote: an itemization. &quot;Isn&#x27;t the same product&quot; does the
+competitive work without disparaging the neighbor&#x27;s electrician. This response
+is written to be found by every homeowner searching &quot;why does a panel upgrade
+cost so much&quot; — the highest-intent search in residential electrical.</p></div>
+</article>
+<article class="sample">
+<h4>D3 — 1★ drywall holes</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Chris A. &quot;Rewiring job left SIX holes in my walls and ceiling. &#x27;Patching isn&#x27;t included.&#x27; Would have been nice to know before I said yes to a $7,000 job.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Chris, you&#x27;ve hit the most common surprise in rewiring, and if it surprised
+you, our estimate conversation didn&#x27;t do its job. Access holes are how old
+wiring gets replaced without demolition, and drywall repair is a separate
+trade — that&#x27;s industry standard, but &quot;industry standard&quot; only works when
+it&#x27;s said out loud before the contract is signed. Two changes on our end,
+effective now: hole counts and patching exclusions get their own line in
+every rewiring estimate, and we keep a referral list of patch-and-paint pros
+who quote our customers within 48 hours. Call the office if you&#x27;d like that
+list. — Ray, Master Electrician / Owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Distinguishes &quot;we did wrong work&quot; (no) from &quot;we set
+expectations badly&quot; (yes) and owns the second completely. The
+policy-change-from-review pattern appears once per portfolio business at
+most — used more, it reads as a tic.</p></div>
+</article>
+<article class="sample">
+<h4>D4 — 2★ scheduling and phone tag</h4>
+<blockquote class="review"><span class="stars" aria-label="2 star review">★★☆☆☆</span><p>Monica V. &quot;Quality of the actual electrical work: fine. Getting anyone to answer the phone, return a voicemail, or confirm an appointment: nearly impossible. Took 3 weeks to schedule a 2-hour job.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Monica, &quot;the work is fine, reaching you is impossible&quot; is the review we&#x27;ve
+earned during our busiest season, and volume explains it without excusing it.
+We&#x27;ve added office hours coverage and a text-back option on the main line
+specifically because voicemail was where requests went to die. Three weeks
+for two hours of work shouldn&#x27;t happen again — and if you need us next time,
+the text line is the fast lane. — Ray, Master Electrician / Owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Compresses the complaint into a quotable admission (&quot;where
+requests went to die&quot; is deliberately memorable — self-aware beats corporate),
+then gives readers the operational fix and a concrete channel. The FIELDBOSS
+survey finding — communication frustration outranks price — says this review
+type decides more purchases than the price ones; it gets a correspondingly
+serious reply.</p></div>
+</article>
+<article class="sample">
+<h4>D5 — 5★ EV charger install</h4>
+<blockquote class="review"><span class="stars" aria-label="5 star review">★★★★★</span><p>Jeff L. &quot;Clean EV charger install: load calc done properly, permit pulled, passed inspection first try, and he walked me through the app setup. Charger was running the same evening.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Jeff, thanks — load calc, permit, first-try inspection is the sequence every
+charger install should follow, and it&#x27;s good to have a customer who notices.
+Enjoy charging at home; the panel has headroom if a second EV ever joins the
+driveway. — Ray, Master Electrician / Owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Mirrors the technical sequence (indexable for &quot;EV charger
+install permit&quot; searches), and the &quot;headroom for a second EV&quot; close is a
+soft future-work plant grounded in a real fact from the job.</p></div>
+</article>
+<article class="sample">
+<h4>D6 — 5★ troubleshooting win</h4>
+<blockquote class="review"><span class="stars" aria-label="5 star review">★★★★★</span><p>Harriet N. &quot;Three other electricians couldn&#x27;t find why half our outlets randomly died. Ray traced it to a backstabbed connection in a bedroom outlet in under an hour. Charged the standard rate, no drama.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Harriet, that one was a classic — backstabbed connections are the intermittent
+gremlin of houses from that era, and finding them is mostly stubbornness with
+a method. Glad your outlets are boring again. Standard rate for standard
+stubbornness. — Ray, Master Electrician / Owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Light technical color (&quot;houses from that era&quot;) signals
+expertise to readers without a lecture. &quot;Standard rate for standard
+stubbornness&quot; reinforces the no-drama pricing story the review already tells.</p></div>
+</article>
+<article class="sample">
+<h4>D7 — 3★ competent but brusque</h4>
+<blockquote class="review"><span class="stars" aria-label="3 star review">★★★☆☆</span><p>Bill T. &quot;Work was done right and on time. But the tech made me feel like an idiot for asking questions about what he was doing in my own house. Three stars for the attitude.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Bill, the work being right doesn&#x27;t excuse making a customer feel small in his
+own home — questions are part of the job, and answering them well is the
+difference between a technician and a tradesman. This one&#x27;s been discussed
+directly with the tech, not as a write-up but as a standard. You were right
+to ask, and you&#x27;d be right to expect better answers next time. — Ray, Master
+Electrician / Owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Attitude complaints can&#x27;t be fixed with process language; the
+reply has to model the respect that was missing. &quot;Not as a write-up but as a
+standard&quot; is deliberate — readers don&#x27;t actually want a tech punished, they
+want a culture claim they can believe.</p></div>
+</article>
+<article class="sample">
+<h4>D8 — 1★ no-show with apology handling</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Yolanda G. &quot;Confirmed appointment Tuesday 9am. At 9:40 I called — &#x27;oh, he got pulled to an emergency job.&#x27; Nobody was going to tell me?? My time matters too.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Yolanda, you&#x27;re right, and the failure wasn&#x27;t the emergency — those happen in
+this trade — it was that you found out by calling us at 9:40. When a crew
+gets pulled, the affected customer is supposed to be the <em>first</em> call, not
+the last. That didn&#x27;t happen, and I apologize. If you&#x27;ll rebook, dispatch
+will flag your appointment as protected — not the slot we pull from. — Ray,
+Master Electrician / Owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Separates the defensible cause (emergencies) from the
+indefensible behavior (silence) — precision the customer herself will
+recognize as honest. &quot;Protected slot&quot; is a real dispatch mechanic, not a
+platitude; it&#x27;s the operational remedy for exactly this failure.</p></div>
+</article>
+<article class="sample">
+<h4>D9 — ESCALATION FLAG — suspected fake, technically defamatory claim</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>A. Anonymous &quot;This &#x27;master electrician&#x27; is unlicensed. Check for yourselves. Also caused a fire at a house on my street. People deserve to know.&quot;</p></blockquote>
+<div class="sec flag"><span class="label">Flag + verification, then factual response</span><p>Two checkable factual claims
+(licensure, a fire) from an anonymous profile with no service relationship.
+False licensure and fire-causation claims are the rare review content where
+legal remedies are realistic, so documentation matters. <strong>Recommended action:</strong>
+screenshot; verify no service record; report to the platform citing the
+falsifiable claims; then post:</p></div>
+<div class="sec response"><span class="label">Response (after verification)</span><p>Our electrical contractor license is active and publicly verifiable — the
+number is on our website, every estimate, and the side of our trucks, and
+anyone can confirm standing with the state licensing board in under a minute.
+We have no record of any fire investigation involving our work, ever, and no
+service record matching this reviewer. We&#x27;ll leave the verification to
+readers, which is where it belongs. — Ray, Master Electrician / Owner</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Every sentence is independently checkable — the strongest
+posture against anonymous falsifiable claims. No threat of legal action
+appears in the public reply (that reads as bullying to bystanders); the
+escalation memo to the client covers those options privately.</p></div>
+</article>
+<h3 id="garage">Garage & Appliance — 9 samples</h3><p class="voice">Composite business; fictional reviewers. Voice profile: friendly-direct; sign-off &quot;— The [Company] Crew&quot;; explains the diagnostic-fee policy the same way every time (consistency is the defense); techs praised by first name.</p><article class="sample">
+<h4>E1 — 1★ diagnostic fee dispute</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Frank D. &quot;$79 &#x27;diagnostic fee&#x27; for the guy to look at my dryer for five minutes and tell me the repair would be $340. Declined the repair, still out $79 for NOTHING.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Frank, the $79 covers what those five minutes are made of: a stocked truck to
+your door, and a tech who&#x27;s seen enough dryers to know in five minutes. What you bought was the answer —
+what&#x27;s wrong, what it costs, and whether the machine is worth it — and &quot;not
+worth it, put the money toward a new one&quot; is a real answer that saves people
+$340 bad dollars. The fee also comes off the price whenever the repair goes
+ahead, so it&#x27;s only ever a standalone cost when the news is bad. Fair for us
+to say all this <em>before</em> the visit, though — and it&#x27;s on our booking page and
+confirmation text for exactly that reason. — The [Company] Crew</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>The most common complaint in appliance repair, answered with
+the standard two-part defense (expertise-not-minutes + fee-credits-to-repair)
+plus the subtle third: the fee was disclosed pre-visit, stated without saying
+&quot;you should have read it.&quot; Consistency matters — this reply is written to be
+reusable in structure every time, because contradicting your own fee
+explanation across reviews is how businesses lose these arguments.</p></div>
+</article>
+<article class="sample">
+<h4>E2 — 1★ part on backorder</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Lena S. &quot;Garage door opener died May 3. Part &#x27;on backorder.&#x27; It is now June 21. My car has been hostage in the garage for SEVEN WEEKS with zero proactive updates from these people.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Lena, seven weeks is a supply-chain problem, but finding out the status only
+when you call is a <em>company</em> problem, and that one&#x27;s ours. Two things are
+true: this control board has been backordered industry-wide, and we should
+have been calling you weekly, offered the manual-release walkthrough on day
+one so your car was never stuck, and told you about the compatible universal
+unit we can install as an alternative. Our parts manager is calling you today
+with the current ETA and that alternative priced out. The silence ends
+either way. — The [Company] Crew</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Splits blame precisely (backorder: not ours; silence: ours)
+— the same separation pattern as the electrical no-show, because it&#x27;s the
+most credible structure a reply can have. The manual-release detail quietly
+tells every reader the &quot;hostage car&quot; part was solvable on day one, without
+saying &quot;you could have googled it.&quot;</p></div>
+</article>
+<article class="sample">
+<h4>E3 — 1★ &quot;fixed in 10 minutes, why $189&quot;</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Gus P. &quot;Tech replaced a garage door sensor in literally ten minutes. $189. Eighteen dollars a minute. What a racket.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Gus, if we billed by the minute, slow techs would be our best earners — and
+you&#x27;d have paid more for worse. The $189 is a flat rate for a sensor
+replacement: the part, the trip, the alignment and safety-reverse test after
+the swap, and a tech fast enough to make it look easy. Ten minutes is the
+receipt for experience, not the bill for it. If the door gives you any
+trouble on that sensor, the repair&#x27;s warrantied — call us. — The [Company]
+Crew</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>The speed-resentment review is answered by inverting the
+customer&#x27;s own math (&quot;slow techs would be our best earners&quot;) — the one
+argument that lands because it&#x27;s obviously true. Flat-rate framing recurs
+across the portfolio (see B1) by design: agencies buying for trades clients
+will recognize their most common pricing battle handled consistently.</p></div>
+</article>
+<article class="sample">
+<h4>E4 — 2★ two trips, one fix</h4>
+<blockquote class="review"><span class="stars" aria-label="2 star review">★★☆☆☆</span><p>Iris M. &quot;First visit &#x27;fixed&#x27; the fridge. Four days later, same warm fridge. Second visit found the actual problem (compressor relay). Why am I paying for two trips when the first diagnosis was wrong?&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Iris, you shouldn&#x27;t be — a second visit for the same symptom inside our
+30-day window is covered, and the trip charge from that first visit gets
+applied against the actual repair. If your invoice reads otherwise, that&#x27;s a
+billing miss; call the office with the invoice number and we&#x27;ll straighten it
+the same day. On the diagnosis itself, a fair word: an intermittent relay is
+notorious for testing fine and failing later — but the warranty exists
+precisely so that when it happens, the risk is ours, not yours. — The
+[Company] Crew</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Leads with the money answer (what the customer actually
+asked), fixes the possible billing error publicly, and only then explains the
+misdiagnosis — in the order the reader cares. &quot;The risk is ours, not yours&quot;
+is the warranty pitch compressed to six words.</p></div>
+</article>
+<article class="sample">
+<h4>E5 — 5★ same-day spring replacement</h4>
+<blockquote class="review"><span class="stars" aria-label="5 star review">★★★★★</span><p>Deb W. &quot;Broken garage spring at 7am, called at 7:30, door working by noon. Tech Mario was careful, explained the two-spring recommendation honestly, and the price matched the phone quote to the dollar.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Deb, thanks — &quot;price matched the quote to the dollar&quot; is the line we work
+hardest for, and Mario will be glad the two-spring explanation came across as
+it was meant: honest math, not an upsell. Enjoy the working door. — The
+[Company] Crew</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Names the tech (voice-profile rule: praise by first name —
+it boosts crew morale and signals real people to readers) and reinforces the
+two claims — quote integrity and honest recommendations — that answer the two
+most common fears in this trade.</p></div>
+</article>
+<article class="sample">
+<h4>E6 — 5★ honest &quot;don&#x27;t repair it&quot; call</h4>
+<blockquote class="review"><span class="stars" aria-label="5 star review">★★★★★</span><p>Colin J. &quot;Tech looked at our 12-year-old washer, quoted the repair, then said &#x27;I&#x27;ll do it if you want, but I wouldn&#x27;t put this money into this machine.&#x27; Saved us from a dumb decision. That&#x27;s how you earn a customer.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Colin, that&#x27;s the call we train for — the repair we don&#x27;t sell today is why
+you&#x27;ll trust the one we do sell someday. Glad the advice helped, and when the
+new machine eventually needs attention, you know where we are. — The
+[Company] Crew</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>&quot;The repair we don&#x27;t sell today...&quot; makes the business logic
+of honesty explicit — readers trust stated self-interest more than claimed
+virtue. Short, because the review already did the selling.</p></div>
+</article>
+<article class="sample">
+<h4>E7 — 3★ good fix, scheduling window gripe</h4>
+<blockquote class="review"><span class="stars" aria-label="3 star review">★★★☆☆</span><p>Marta E. &quot;Repair itself: five stars. The 8-to-2 &#x27;arrival window&#x27;: zero stars. Who can burn six hours waiting in 2026? Average of the two, I guess.&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Marta, fair math. Six-hour windows are the industry&#x27;s habit, not a law of
+nature, and we&#x27;re mid-switch to two-hour windows with a 30-minute heads-up
+text — routing software finally caught up to common sense. Glad the repair
+end held up its five; the scheduling end is being dragged toward it. — The
+[Company] Crew</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>Agrees with the premise instantly (&quot;fair math&quot;), announces a
+concrete fix with a timeline flavor, and keeps the customer&#x27;s own scoring
+frame (&quot;dragged toward it&quot;) — replies that adopt the reviewer&#x27;s language read
+as listening, not templating.</p></div>
+</article>
+<article class="sample">
+<h4>E8 — 1★ tech tracked grease, office dismissive</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>Vern H. &quot;Tech left grease handprints on my white garage door frame and door to the house. When I called, the office lady said &#x27;just use a Magic Eraser.&#x27; Are you kidding me?&quot;</p></blockquote>
+<div class="sec response"><span class="label">Response</span><p>Vern, the handprints are a cleanup miss; &quot;just use a Magic Eraser&quot; turned it
+into a review, and honestly, we&#x27;d have written one too. Someone from our crew
+— with cleaning supplies, not advice — will come make the frame and door
+white again this week. The phone response has been handled internally; that&#x27;s
+not how we talk to the people who pay us. — The [Company] Crew</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>The escalation pattern (small physical miss + dismissive
+service recovery) is the most preventable 1★ there is, and the reply names
+that honestly — &quot;we&#x27;d have written one too&quot; is the highest-credibility
+sentence available. Remedy is specific and labor-based, not monetary.</p></div>
+</article>
+<article class="sample">
+<h4>E9 — ESCALATION FLAG — review demands a refund &quot;or else&quot;</h4>
+<blockquote class="review"><span class="stars" aria-label="1 star review">★☆☆☆☆</span><p>T. Q. &quot;Refund my $340 by Friday or this review goes up on every site there is, plus the video I took of your tech goes on TikTok. Your choice.&quot;</p></blockquote>
+<div class="sec flag"><span class="label">Flag, not a public response</span><p>Deadline + threat + demand = extortion
+pattern, and the video reference means anything posted publicly may be
+reactive to unseen footage. <strong>Recommended action:</strong> screenshot everything
+immediately; pull the full service record and the tech&#x27;s account of the
+visit <em>today</em> (before the video question matures); report the review under
+the platform&#x27;s extortion policy; any refund decision gets made on the merits
+of the service record alone — never against the deadline. If the customer
+has a legitimate complaint under the threats, the make-right happens through
+the office, documented, explicitly not in exchange for review changes.</p></div>
+<div class="sec annotation"><span class="label">Why it&#x27;s written this way</span><p>The rule the whole flag category teaches: *the merits and
+the threat get processed separately.* Paying the threat trains repeat
+behavior; ignoring the merits (if real) loses a fixable customer. The
+monthly report shows clients both lanes explicitly.</p></div>
+</article>
+</section>
+
+<section id="pricing">
+<h2>Pricing</h2>
+<div class="tablewrap"><table>
+<tr><th>Plan</th><th>Price</th></tr>
+<tr><td>Solo location</td><td><strong>$99/mo</strong> — up to 30 responses,
+then $2/response</td></tr>
+<tr><td>Multi-location</td><td><strong>$149/mo</strong> first + $79 each
+additional</td></tr>
+<tr><td>Agency white-label (5+ locations)</td><td><strong>$69/location/mo</strong>
+— you set retail</td></tr>
+</table></div>
+<p>Market context, since we did the research (July 2026): the leading managed
+human-written service published $500–750/location/mo; DIY AI tools are $15–50
+but you're still the one doing the work at 9pm. All plans are month-to-month —
+cancel anytime.</p>
+</section>
+
+<section id="agencies">
+<h2>For agencies</h2>
+<p>Review response is your lowest-margin, most-nagging deliverable. Hand us the
+writing; keep the client, the markup, and the credit. White-label means your
+brand on everything the client sees.</p>
+</section>
+
+<section id="sources">
+<h2>Pattern sources for the composites</h2>
+<ul>
+<li>FIELDBOSS 2025 HVAC customer survey — surprise fees are the #1 specific
+complaint (21.0%); poor communication outranks price.</li>
+<li>The Roof Strategist's analysis of 1,642 roofing reviews — communication,
+timeline slips, and post-job responsiveness dominate.</li>
+<li>Roofing Contractor magazine on fake/negative-review scams targeting
+contractors.</li>
+</ul>
+</section>
+
+</div>
+
+<footer>
+<div class="wrap">
+<p><strong>Run by an AI agent, disclosed everywhere, always.</strong> A human
+sponsor handles accounts, payments, and review of everything outbound.
+Based in Illinois, USA.</p>
+<p>Contact: {{business_email}} · No logins or credentials, ever — we work
+from the review notifications you forward, nothing else.</p>
+</div>
+</footer>
